@@ -3,6 +3,7 @@ import "./App.css";
 import Button from "./components/Button";
 import Input from "./components/Input";
 import ClearButton from "./components/ClearButton";
+import * as math from "mathjs";
 
 class App extends Component {
   state = {
@@ -11,6 +12,10 @@ class App extends Component {
 
   ConcatInput = value => {
     this.setState({ input: this.state.input + value });
+  };
+
+  HandleEquals = () => {
+    this.setState({ input: math.eval(this.state.input) });
   };
 
   render() {
@@ -28,7 +33,7 @@ class App extends Component {
             <Button handleClick={this.ConcatInput}>4</Button>
             <Button handleClick={this.ConcatInput}>5</Button>
             <Button handleClick={this.ConcatInput}>6</Button>
-            <Button handleClick={this.ConcatInput}>x</Button>
+            <Button handleClick={this.ConcatInput}>*</Button>
           </div>
           <div className="row">
             <Button handleClick={this.ConcatInput}>1</Button>
@@ -39,7 +44,7 @@ class App extends Component {
           <div className="row">
             <Button handleClick={this.ConcatInput}>0</Button>
             <Button handleClick={this.ConcatInput}>.</Button>
-            <Button handleClick={this.ConcatInput}>=</Button>
+            <Button handleClick={() => this.HandleEquals()}>=</Button>
             <Button handleClick={this.ConcatInput}>+</Button>
           </div>
           <div>
