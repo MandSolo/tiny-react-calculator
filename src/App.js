@@ -17,25 +17,35 @@ class App extends Component {
 
   ConcatInput = value => {
     //have to change x to * because doesnt work as math function
+    //if first value input is not 0 it replaces it with the value
 
     if (this.state.input.length <= 10) {
-
-    this.setState({
-      input: value === "x"
-      ? this.state.input + "*"
-     : this.state.input !== "0"
-     ? this.state.input + value
-     : value
-    })};
-
+      this.setState({
+        input:
+          value === "x"
+            ? this.state.input + "*"
+            : this.state.input !== "0"
+            ? this.state.input + value
+            : value
+      });
+    }
   };
 
   HandleEquals = () => {
     this.setState({ input: math.eval(this.state.input) });
   };
 
-HandlePercent  = () => {
+  HandlePercent = () => {
     this.setState({ input: math.eval(this.state.input / 100) });
+  };
+
+  HandleSqrt = () => {
+    let input = math.sqrt(this.state.input);
+    if (input.length >= 10) {
+      input = input.toPrecision(9);
+      console.log(input)
+    }
+    this.setState({ input });
   };
 
   render() {
@@ -54,9 +64,11 @@ HandlePercent  = () => {
             <CButton handleClear={() => this.setState({ input: "0" })}>
               C
             </CButton>
-     
-            <TopRowButton handleClick={this.ConcatInput}>√</TopRowButton>
-            <TopRowButton handleClick={() => this.HandlePercent()}>%</TopRowButton>
+
+            <TopRowButton handleClick={() => this.HandleSqrt()}>√</TopRowButton>
+            <TopRowButton handleClick={() => this.HandlePercent()}>
+              %
+            </TopRowButton>
           </div>
           <div className="row">
             <Button handleClick={this.ConcatInput}>7</Button>
