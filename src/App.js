@@ -32,19 +32,45 @@ class App extends Component {
   };
 
   HandleEquals = () => {
-    this.setState({ input: math.eval(this.state.input) });
+   // this.setState({ input: math.eval(this.state.input) });
+   let input = math.eval(this.state.input)
+   this.processInput(input)
+ };
+ 
+ processInput = input => {
+   if(`${input}`.length >= 10) {
+     input = input.toPrecision(5)
+   }
+ 
+   this.setState({ input });
+
   };
 
   HandlePercent = () => {
-    this.setState({ input: math.eval(this.state.input / 100) });
-  };
+  //   this.setState({ input: math.eval(this.state.input / 100) })
+  // };
+  let input = math.eval(this.state.input / 100)
+  this.processInput(input)
+};
+
+processInput = input => {
+  if(`${input}`.length >= 10) {
+    input = input.toPrecision(5)
+  }
+
+  this.setState({ input });
+};
 
   HandleSqrt = () => {
-    let input = math.sqrt(this.state.input);
-    if (input.length >= 10) {
-      input = input.toPrecision(9);
-      console.log(input)
+    let input = math.sqrt(this.state.input)
+    this.processInput(input)
+  };
+
+  processInput = input => {
+    if(`${input}`.length >= 10) {
+      input = input.toPrecision(5)
     }
+
     this.setState({ input });
   };
 
